@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEET AI Mock Test</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">NEET Mock Test 2025</div>
+        <div class="timer-box">
+            <span>Time Left: </span>
+            <span id="timer">03:00:00</span>
+        </div>
+        <button id="finish-btn" class="btn-danger">Submit Test</button>
+    </header>
+
+    <div id="test-interface" class="main-layout">
+
+        <aside class="sidebar">
+            <div class="palette-header">Question Palette</div>
+            <div id="question-palette" class="palette-grid">
+            </div>
+            <div class="legend">
+                <span class="dot answer"></span> Answered
+                <span class="dot visited"></span> Visited
+            </div>
+        </aside>
+
+        <main class="pdf-section">
+            <div id="pdf-container">
+                <canvas id="the-canvas"></canvas>
+            </div>
+        </main>
+
+        <aside class="controls">
+            <div class="current-q-info">
+                <h3>Question <span id="disp-q-num">1</span></h3>
+            </div>
+
+            <div class="options-grid">
+                <button class="opt-btn" onclick="selectOption('A')">A</button>
+                <button class="opt-btn" onclick="selectOption('B')">B</button>
+                <button class="opt-btn" onclick="selectOption('C')">C</button>
+                <button class="opt-btn" onclick="selectOption('D')">D</button>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-nav" onclick="navigate(-1)">Previous</button>
+                <button class="btn-nav primary" onclick="navigate(1)">Next</button>
+            </div>
+
+            <button class="btn-clear" onclick="clearSelection()">Clear Selection</button>
+        </aside>
+    </div>
+
+    <div id="result-screen" style="display: none; padding: 40px; text-align: center; background: white; height: 100vh;">
+        <h1 style="color: #28a745; font-size: 3rem; margin-bottom: 10px;">Test Submitted Successfully!</h1>
+        <p style="font-size: 1.2rem; color: #666;">Your files are downloading automatically...</p>
+
+        <div class="score-card" style="max-width: 600px; margin: 30px auto; background: #f8f9fa;">
+            <div class="score-item">
+                <span class="label">Total Score</span>
+                <span class="value" id="res-score">0 / 720</span>
+            </div>
+            <div class="score-item">
+                <span class="label">Time Taken</span>
+                <span class="value" id="res-time">00:00:00</span>
+            </div>
+            <div class="score-item">
+                <span class="label">Accuracy</span>
+                <span class="value" id="res-accuracy">0%</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button onclick="downloadResultPDF()" class="btn-success">Re-download Result PDF</button>
+            <a href="paper.pdf" download class="btn-primary"
+                style="text-decoration:none; padding: 12px 20px;">Re-download Question Paper</a>
+        </div>
+
+        <h3 style="margin-top: 40px; color: #dc3545;">Incorrect Answers Review</h3>
+        <div id="wrong-answers-list" class="wrong-list" style="max-width: 800px; margin: 0 auto;">
+        </div>
+    </div>
+
+    <script src="coordinates.js"></script>
+    <script src="answers.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
